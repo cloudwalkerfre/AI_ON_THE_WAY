@@ -15,6 +15,9 @@ plt.title('Sine and Cosine')
 plt.legend(['Sine', 'Cosine'])
 plt.show()
 
-## this is how it work?
-# now may I see the profit?
+
+
+
+
+
 
