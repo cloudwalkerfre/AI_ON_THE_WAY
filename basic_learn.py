@@ -1,3 +1,4 @@
+#coding:utf-8
 # import time
 
 # x = 3
@@ -149,9 +150,34 @@ print  x
 
 t = (5, 6)
 print type(t)
-print x[t], x[(1, 2)]
+print x[t], x[(1, 2)], t * 3
+
+#只以逗号分隔, 默认位元组 (中文注释,加 - #coding:utf-8)
+a, b, c, d, e, f, g = 1, 2, 3, 4, 5, 6, 7
+print a, b, c, d, e, f, g
 
 
+# def sign(si):
+#     if 0 in si:
+#         return si
+#     elif 5 in si:
+#         return si
+#     else:
+#         return 'nothing'
+
+# for xx in x:
+#     print sign(xx), sign(x[xx])
+
+def really(msg, bl = False):
+    if bl:
+        return msg
+    else:
+        return msg
+
+print really('no'), really('yes', True)
+
+
+# print '__________________________________________________________'
 
 # print '__________________________________________________________'
 
