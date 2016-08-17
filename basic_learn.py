@@ -145,16 +145,16 @@
 
 # print '__________________________________________________________'
 
-x = {(x, x+1):(x - 1, x) for x in range(10)}
-print  x
+# x = {(x, x+1):(x - 1, x) for x in range(10)}
+# print  x
 
-t = (5, 6)
-print type(t)
-print x[t], x[(1, 2)], t * 3
+# t = (5, 6)
+# print type(t)
+# print x[t], x[(1, 2)], t * 3
 
-#只以逗号分隔, 默认位元组 (中文注释,加 - #coding:utf-8)
-a, b, c, d, e, f, g = 1, 2, 3, 4, 5, 6, 7
-print a, b, c, d, e, f, g
+# #只以逗号分隔, 默认位元组 (中文注释,加 - #coding:utf-8)
+# a, b, c, d, e, f, g = 1, 2, 3, 4, 5, 6, 7
+# print a, b, c, d, e, f, g
 
 
 # def sign(si):
@@ -168,16 +168,36 @@ print a, b, c, d, e, f, g
 # for xx in x:
 #     print sign(xx), sign(x[xx])
 
-def really(msg, bl = False):
-    if bl:
-        return msg
-    else:
-        return msg
+# def really(msg, bl = False):
+#     if bl:
+#         return msg
+#     else:
+#         return msg
 
-print really('no'), really('yes', True)
+# print really('no'), really('yes', True)
 
 
 # print '__________________________________________________________'
+
+class FC(object):
+    def __init__(self, name):
+        self.name = name
+
+    def greet(self, Upper = False):
+        if Upper:
+            print self.name.upper()
+        else:
+            print self.name
+
+f = FC('names Jame')
+f.greet()
+f.greet(True)
+
+
+
+
+
+
 
 # print '__________________________________________________________'
 
