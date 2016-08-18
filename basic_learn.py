@@ -194,8 +194,6 @@ f.greet()
 f.greet(True)
 
 
-print 11/3
-
 
 
 
