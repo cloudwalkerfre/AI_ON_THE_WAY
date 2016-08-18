@@ -353,8 +353,8 @@ import calendar
 
 # print '__________________________________________________________'
 
-something = raw_input()
-print something
+# something = raw_input()
+# print something
 
 
 
