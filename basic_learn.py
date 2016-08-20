@@ -7,7 +7,7 @@ import re
 import thread
 import threading
 import Queue
-# import Pymongo
+import pymongo
 
 
 # x = 3
@@ -534,66 +534,78 @@ import Queue
 #    print "Error: unable to start thread"
 
 
-exitFlag = 0
+# exitFlag = 0
 
-class qTread(threading.Thread):
-      def __init__(self, threadID, threadName, qWorking):
-            threading.Thread.__init__(self)
-            self.threadID = threadID
-            self.threadName = threadName
-            self.qWorking = qWorking
-      def run(self):
-            print 'starting:', self.threadName
-            process(self.threadID, self.threadName, self.qWorking)
-            print 'exiting:', self.threadName
+# class qTread(threading.Thread):
+#       def __init__(self, threadID, threadName, qWorking):
+#             threading.Thread.__init__(self)
+#             self.threadID = threadID
+#             self.threadName = threadName
+#             self.qWorking = qWorking
+#       def run(self):
+#             print 'starting:', self.threadName
+#             process(self.threadID, self.threadName, self.qWorking)
+#             print 'exiting:', self.threadName
 
-def process(ID, name, qWorking):
-      while not exitFlag: 
-            if not qWorking.empty():
-                  queLcok.acquire()
-                  print 'processing:', name, '-', qWorking.get()
-                  queLcok.release()
-                  time.sleep(0.2)
-                  # print 'finishing:', name, '-', qWorking.get()
-            else:
-                  print ID, 'Que empty'
-            time.sleep(random.uniform(1, 2))
+# def process(ID, name, qWorking):
+#       while not exitFlag: 
+#             if not qWorking.empty():
+#                   queLcok.acquire()
+#                   print 'processing:', name, '-', qWorking.get()
+#                   queLcok.release()
+#                   time.sleep(0.2)
+#                   # print 'finishing:', name, '-', qWorking.get()
+#             else:
+#                   print ID, 'Que empty'
+#             time.sleep(random.uniform(1, 2))
 
-qW = Queue.Queue(10)
-queLcok = threading.Lock()
-threads = []
+# qW = Queue.Queue(10)
+# queLcok = threading.Lock()
+# threads = []
 
-for i in range(5):
-      T = qTread(i + 1, '#Thread%s' % str(i+1), qW)
-      T.start()
-      threads.append(T)
+# for i in range(5):
+#       T = qTread(i + 1, '#Thread%s' % str(i+1), qW)
+#       T.start()
+#       threads.append(T)
 
-###STRAT
-st = time.time()
-
-
-# data = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'g')*10
-data = range(200)
-for i in data:
-      while qW.full():
-            print 'data waiting for put:', i
-            time.sleep(0.5)
-      queLcok.acquire()
-      qW.put(i)
-      queLcok.release()
-      print 'Que put:', i
-      time.sleep(random.uniform(0, 0.5))
-
-time.sleep(10)
-exitFlag = 1
-
-for t in threads:
-      t.join()
+# ###STRAT
+# st = time.time()
 
 
-###FINSIN
-ft = time.time()
-print (ft - st)/200
+# # data = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'g')*10
+# data = range(200)
+# for i in data:
+#       while qW.full():
+#             print 'data waiting for put:', i
+#             time.sleep(0.5)
+#       queLcok.acquire()
+#       qW.put(i)
+#       queLcok.release()
+#       print 'Que put:', i
+#       time.sleep(random.uniform(0, 0.5))
+
+# time.sleep(10)
+# exitFlag = 1
+
+# for t in threads:
+#       t.join()
+
+
+# ###FINSIN
+# ft = time.time()
+# print (ft - st)/200
+
+# print '__________________________________________________________'
+
+
+client = pymongo.MongoClient("localhost", 27017)
+db = client.pymo_learn
+print db.collection_names(), db.firstMsg.find_one()
+fMsg = db.firstMsg
+for i in range(10):
+      fMsg.insert({('test%d' % (i + 3)):('newMSG%d' % (i+3))})
+for i in fMsg.find():
+      print i
 
 
 
