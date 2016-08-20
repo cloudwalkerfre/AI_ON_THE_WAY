@@ -1,6 +1,15 @@
 #coding:utf-8
 import time
-import calendar 
+# import calendar 
+# import math
+import random
+import re
+import thread
+import threading
+import Queue
+# import Pymongo
+
+
 # x = 3
 # print type(x)
 # print x
@@ -354,7 +363,96 @@ import calendar
 # print '__________________________________________________________'
 
 # something = raw_input()
-# print something
+# print something   
+
+# print '__________________________________________________________'
+
+
+# print math.ceil(1.1)
+# print math.floor(1.1)
+
+# print abs(-10)
+# print math.fabs(-10)
+
+# print math.log(8, 2)
+# print math.log10(100)
+
+# print math.modf(1.1)
+# print math.pow(2, 3)
+# print math.sqrt(4)
+
+
+# print random.random()
+# print random.choice(range(10))
+# print random.randrange(10, 100, 5)
+# x = range(10)
+# print x
+# random.shuffle(x)
+# print x
+# print random.uniform(1, 2)
+
+# print math.degrees(math.acos(0.5))
+# print math.radians(math.degrees(math.acos(0.5)))
+# print math.cos(math.pi / 3)
+# print math.sin(math.pi / 6)
+# print math.degrees(math.asin(math.sqrt(0.75)))
+# print math.radians(math.degrees(math.asin(math.sqrt(0.75))))
+
+
+# print '__________________________________________________________'
+
+# var1 = 'hello ha'
+# var2 = var1[:6] + '\n\000cloudwalker'
+# print var2
+
+# print '\v1 \t2 \r \f'
+# print r'\v1 \t2 \r \f'
+# print R'\v1 \t2 \r \f'
+
+# var3 = range(3)
+# var4 = ['#%d: %s' % (e + 1, i) for e, i in enumerate(var3) ]
+# print var4
+
+# ht = ''' I'm gonna type in what ever the fuck
+# I want to type, yeah !#%$%&^*(&()&&$&%^(&))
+# and you gonna copy'''
+
+# print ht,'\n',ht.capitalize(), '\n', ht.upper()
+# print ht.count('I', 0, len(ht))
+# print ht.find('I', 0, len(ht))
+# print ht.index('I', 0, len(ht))
+# print ht.isalnum()
+# print ht.isalpha()
+# print str(var3).isdigit()
+# encode = ht.encode('base64', 'strict')
+# decode = encode.decode('base64', 'strict')
+# print encode, decode
+# seq = ('a', 'b', 'c')
+# print ' - '.join(str(range(10)))
+# print '-'.join(seq)
+# print u'hello\u0020world'
+
+# print str(var3).center(5)
+
+# print '__________________________________________________________'
+
+# line = "Cats are smarter than dogs"
+
+# matchObj = re.match( r'(.*) are (.*?) .*', line, re.M|re.I)
+
+# for i in matchObj.groups():
+#     print i
+# print matchObj.group(), len(matchObj.groups())
+
+# ipn = '192.168.1.1 shdfh'
+
+# mp = re.match('((2[0-4]\d|25[0-5]|[01]?\d\d?.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?))', ipn, re.M|re.I)
+# print mp.group(0)    
+
+# s = 'abcdefghijklmnopq'
+# sp = re.match('\w{3}', s, re.M)
+
+
 
 
 
@@ -364,6 +462,145 @@ import calendar
 
 # print '__________________________________________________________'
 
+# def pTime(pName, count):
+#     i = 0  
+#     while i < count:
+#         time.sleep(1)
+#         print "%s: %s" % (pName, time.ctime(time.time()))
+#         i += 1
+
+# try:
+#     thread.start_new_thread(pTime, ('p2', 10,))
+#     thread.start_new_thread(pTime, ('p1', 5,))
+# except:
+#     print 'erro'
+
+# exitFlag = 0
+
+# class cp(threading.Thread):
+#       def __init__(self, threadID, name, count):
+#             threading.Thread.__init__(self)
+#             self.threadID = threadID
+#             self.name = name
+#             self.count = count
+#       def run(self):    
+#             print 'starting:', self.name
+#             threadLock.acquire()
+#             pTime(self.name, self.count)
+#             threadLock.release()
+#             print 'exiting:', self.name
+# def pTime(name, count):
+#       i = 0
+#       while i < count:
+#             if exitFlag: break
+#             time.sleep(1)
+#             print '%s: %s' % (name, time.ctime(time.time()))
+#             i += 1
+      
+# threadLock = threading.Lock()
+# threads = []
+
+# cp1 = cp(1, "p1", 10)
+# cp2 = cp(2, "p2", 5)
+
+# cp2.start()
+# cp1.start()
+
+# threads.append(cp1)
+# threads.append(cp2)
+
+# for t in threads:
+#       t.join()
+# print 'ALL DONE'
 
 
-# time.sleep(15)
+# time.sleep(3)
+# exitFlag = 1
+
+
+# # 为线程定义一个函数
+# def print_time( threadName, delay):
+#    count = 0
+#    while count < 5:
+#       time.sleep(delay)
+#       count += 1
+#       print "%s: %s" % ( threadName, time.ctime(time.time()) )
+
+# # 创建两个线程
+# try:
+#    thread.start_new_thread( print_time, ("Thread-1", 2, ) )
+#    thread.start_new_thread( print_time, ("Thread-2", 4, ) )
+# except:
+#    print "Error: unable to start thread"
+
+
+exitFlag = 0
+
+class qTread(threading.Thread):
+      def __init__(self, threadID, threadName, qWorking):
+            threading.Thread.__init__(self)
+            self.threadID = threadID
+            self.threadName = threadName
+            self.qWorking = qWorking
+      def run(self):
+            print 'starting:', self.threadName
+            process(self.threadID, self.threadName, self.qWorking)
+            print 'exiting:', self.threadName
+
+def process(ID, name, qWorking):
+      while not exitFlag: 
+            if not qWorking.empty():
+                  queLcok.acquire()
+                  print 'processing:', name, '-', qWorking.get()
+                  queLcok.release()
+                  time.sleep(0.2)
+                  # print 'finishing:', name, '-', qWorking.get()
+            else:
+                  print ID, 'Que empty'
+            time.sleep(random.uniform(1, 2))
+
+qW = Queue.Queue(10)
+queLcok = threading.Lock()
+threads = []
+
+for i in range(5):
+      T = qTread(i + 1, '#Thread%s' % str(i+1), qW)
+      T.start()
+      threads.append(T)
+
+###STRAT
+st = time.time()
+
+
+# data = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'g')*10
+data = range(200)
+for i in data:
+      while qW.full():
+            print 'data waiting for put:', i
+            time.sleep(0.5)
+      queLcok.acquire()
+      qW.put(i)
+      queLcok.release()
+      print 'Que put:', i
+      time.sleep(random.uniform(0, 0.5))
+
+time.sleep(10)
+exitFlag = 1
+
+for t in threads:
+      t.join()
+
+
+###FINSIN
+ft = time.time()
+print (ft - st)/200
+
+
+
+
+
+# print '__________________________________________________________'
+
+# MAKE SURE CONSOLE STAYS -- So at least I can see ...
+while 1:
+      pass
