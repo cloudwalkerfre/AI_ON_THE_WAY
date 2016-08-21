@@ -1,0 +1,6 @@
+#python file test
+LINE1: 
+LINE2: a
+LINE4: b
+LINE3: c
+LINE5: d

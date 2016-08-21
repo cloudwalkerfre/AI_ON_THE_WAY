@@ -6,8 +6,10 @@ import random
 import re
 import thread
 import threading
-import Queue
-import pymongo
+# import Queue
+# import pymongo
+# from bson.code import Code
+import os
 
 
 # x = 3
@@ -598,14 +600,95 @@ import pymongo
 # print '__________________________________________________________'
 
 
-client = pymongo.MongoClient("localhost", 27017)
-db = client.pymo_learn
-print db.collection_names(), db.firstMsg.find_one()
-fMsg = db.firstMsg
-for i in range(10):
-      fMsg.insert({('test%d' % (i + 3)):('newMSG%d' % (i+3))})
-for i in fMsg.find():
-      print i
+# client = pymongo.MongoClient("localhost", 27017)
+# db = client.pymo_learn
+# print db.collection_names()#, db.firstMsg.find_one()
+# fMsg = db.firstMsg
+# # for i in range(10):
+# #       fMsg.insert({('test%d' % (i + 3)):('newMSG%d' % (i+3))})
+# for i in fMsg.find():
+#       print i
+# print fMsg.find_one({'test4':''}), fMsg.find().count()
+
+
+# s = [{'N_ID':'%d' % (x + 1),'u_Time':'%s' % str(time.time())}  for x in range(150)]
+# fMsg.insert_many(s)
+# print fMsg.find().count()
+
+# mapper = Code('''
+#             function(){
+#                   this.N_ID.forEach(function(z){
+#                         emit(z, 1);
+#                   });
+#             }
+#             ''')
+
+# reducer = Code('''
+#             function(key, values){
+#                   var total = 0;
+#                   for(var i = 0; i < values.length; i++){
+#                         total += values[i];
+#                   }
+#                   return total;
+#             }
+#             ''')
+
+# results = fMsg.map_reduce(mapper, reducer, "myresults")
+# for r in results:
+#       print r
+
+# print '__________________________________________________________'
+
+
+# f = open('py_file_test.txt', 'r+')
+# print f.name, f.closed, f.mode, f.softspace
+# try:
+#       # f.write('LINE5: d')
+#       # print f.read(), f.tell()
+#       # f.seek(0, 0)
+#       # print f.tell()
+#       # os.rmdir('pydir') 
+#       print os.getcwd()
+
+#       for l in f.readlines():
+#             print l
+
+#       f.seek(0, 0)
+#       tmp = f.readlines()
+#       print len(tmp), str(tmp)
+#       t = tmp[4]
+#       tmp[4] = tmp[3]
+#       tmp[3] = t
+ 
+#       f.seek(0, 0)
+#       f.writelines(tmp)
+
+#       f.seek(0, 0)
+#       for l in f.readlines():
+#             print l
+
+# except ValueError, Argument:
+#       print 'I/O Error', Argument
+
+# f.close()
+
+# print '__________________________________________________________'
+
+
+import time_p
+p = time_p.pTime
+p()
+p()
+p()
+reload(time_p)
+p()
+p()
+p()
+
+
+
+
+
 
 
 
@@ -614,5 +697,5 @@ for i in fMsg.find():
 # print '__________________________________________________________'
 
 # MAKE SURE CONSOLE STAYS -- So at least I can see ...
-while 1:
-      pass
+# while 1:
+#       pass
