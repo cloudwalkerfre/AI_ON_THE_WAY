@@ -675,24 +675,15 @@ import os
 # print '__________________________________________________________'
 
 
-import time_p
-p = time_p.pTime
-p()
-p()
-p()
-reload(time_p)
-p()
-p()
-p()
-
-
-
-
-
-
-
-
-
+# import time_p
+# p = time_p.pTime
+# p()
+# p()
+# p()
+# reload(time_p)
+# p()
+# p()
+# p()
 
 # print '__________________________________________________________'
 
